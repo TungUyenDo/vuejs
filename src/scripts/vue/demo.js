@@ -1,5 +1,5 @@
 var vue = new Vue({
-    el: '#app-demo',
+    el: '#demo1',
     data: {
         search: '',
         student: {
@@ -67,8 +67,5 @@ var vue = new Vue({
         }
     }
 });
-vue.people.push({
-    name: 'Vu Van E',
-    age: '22',
-    class: '12G'
-});
+
+// console.log(vue.$data.people)

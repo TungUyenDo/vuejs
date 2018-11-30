@@ -1,4 +1,4 @@
-<div class="container" id="app-demo" style="margin-top: 40px;">
+<div class="container" id="demo1" style="margin-top: 40px;">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
@@ -27,9 +27,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(person, index) in searchs">
-                                    <td>{{ person.name }}</td>
-                                    <td>{{ person.age }}</td>
-                                    <td>{{ person.class }}</td>
+                                    <td v-html="person.name"></td>
+                                    <td v-html="person.age"></td>
+                                    <td v-html="person.class"></td>
                                     <td>
                                         <button type="buton" v-on:click="updateStudent(index)" class="btn btn-info" data-toggle="modal" data-target="#myModalu">
                                             <i class="glyphicon glyphicon-pencil"></i>
