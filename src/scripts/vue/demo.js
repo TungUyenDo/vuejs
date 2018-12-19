@@ -1,71 +1,34 @@
-var vue = new Vue({
-    el: '#demo1',
+
+var myNav = {
+    template: '<div>nav</div>'
+};
+var mySibebar = {
+    template: '<div>sidebar</div>'
+};
+var myContent = {
+    template: '<div>content</div>'
+};
+
+
+var app = new Vue({
+    el: '#app',
     data: {
-        search: '',
-        student: {
-            id: 0,
-            name: '',
-            age: '',
-            class: ''
-        },
-        people: [{
-            name: 'Vu Van A',
-            age: '20',
-            class: '12B'
-        }, {
-            name: 'Vu Van B',
-            age: '12',
-            class: '12A'
-        }, {
-            name: 'Vu Van C',
-            age: '14',
-            class: '12E'
-        }, {
-            name: 'Vu Van D',
-            age: '18',
-            class: '12D'
-        },],
+
     },
     methods: {
-        addStudent: function () {
-            if (this.people.push(this.student)) {
 
-            }
-        },
-        clearStudent: function () {
-            this.student = {
-                id: '',
-                name: '',
-                age: '',
-                class: ''
-            };
-        },
-        deleteStudent: function (index) {
-            delete this.people.splice(index, 1);
-        },
-        updateStudent: function (index) {
-            this.student = this.people[index];
-            this.student.id = index;
-        },
+    },
+    components: {
+        'app-nav': myNav,
+        'app-sidebar': mySibebar,
+        'app-content': myContent,
     },
     computed: {
-        searchs: function (newsearch) {
-            var da = [];
-            var search = this.search;
-            if (this.search != '') {
-                this.people.forEach(function (item, index) {
 
-                    if (item.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
-                        console.log(item.name.toLowerCase());
-                        da.push(item);
-                    }
-                });
-                return da;
-            } else {
-                return this.people;
-            }
-        }
+    },
+    ready: function () {
+
     }
-});
 
-// console.log(vue.$data.people)
+})
+
