@@ -1,30 +1,52 @@
 
-var myNav = {
-    template: '<div>nav</div>'
+
+var myCheckbox = {
+    data() {
+        return {
+            checkbox:{
+                checked: false,
+                title: 'Check me '
+            },
+            items : [
+                {
+                    checked: false,
+                    title: 'Check me 1'
+                },
+                {
+                    checked: true,
+                    title: 'Check me 2'
+                },
+                {
+                    checked: false,
+                    title: 'Check me 3'
+                },
+            ]
+        }
+    },
+    methods: {
+       
+        check() {
+            this.checked = !this.checked;
+        }
+    }
 };
-var mySibebar = {
-    template: '<div>sidebar</div>'
-};
-var myContent = {
-    template: '<div>content</div>'
-};
+
 
 
 var app = new Vue({
     el: '#app',
     data: {
-
+        title: 'this my title',
     },
     methods: {
 
     },
-    components: {
-        'app-nav': myNav,
-        'app-sidebar': mySibebar,
-        'app-content': myContent,
-    },
     computed: {
 
+    },
+
+    components:{
+        'my-checkbox': myCheckbox
     },
     ready: function () {
 
@@ -32,3 +54,8 @@ var app = new Vue({
 
 })
 
+console.log(app)
+
+
+
+// console.log(app)
