@@ -1,0 +1,18 @@
+.header{
+    .navigation{
+        ul{
+            list-style: none;
+            padding: 0;
+            li{
+                display: inline;
+                text-transform: uppercase;
+                padding: 0 10px;
+                &.router-link-active{
+                    a{
+                        color: red
+                    }
+                }
+            }
+        }
+    }
+}
