@@ -1,8 +1,25 @@
-.todo-list{
-    &__list{
-        // list-style: none;
-        li{
-            padding: 5px 0
+.todo-list {
+    &__list {
+        list-style: none;
+        padding: 0;
+        li {
+            background: #343a40;
+            padding: 5px 30px;
+            margin-bottom: 1px;
+            a {
+                color: #fff !important;
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
         }
+    }
+    &__heading {
+        padding: 12px;
+        background: #41b883;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold
     }
 }

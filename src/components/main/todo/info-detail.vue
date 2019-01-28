@@ -1,8 +1,7 @@
 
 <template>
    <div class="todo-detail">
-	<div  v-on:click="abc + 1">{{abc }}</div>
-		<div class="heading">Todo Detail {{abc }}</div>
+		<div class="heading">Todo Detail</div>
 		
 		<div class="detail">
 			<p style="color:#fff" v-if="!detail"><i>Select on list!</i></p>
@@ -16,46 +15,27 @@
 				<div class="form-group">
 					<textarea v-model="detail.body" type="text" rows="5" class="form-control" placeholder="Description..."></textarea>
 				</div>
-				<div style="text-align:center">
-					<div class="btn btn-success">
-						View Info Detail
-					</div>
-					<div class="btn btn-primary" @click="sampleFunction()">
-						Update Todo
-					</div>
+				<div class="btn btn-success">
+					View Info Detail
 				</div>
-				
 			</form>
 			
 		</div>
 	</div>
+	
 </template>
 
 <script>
 	export default {
-		name:'todoDetail',
+		name:'infoDetail',
 		props: {
-			detail : ''
 		},
 		components:{
-		},
-		method:{
-			sampleFunction(){
-				console.log("You have selected: ",$event)
-			}
-		},
-		data: function() {
-			return {
-				res:'',	
-				abc: 1
-			}
 		},
 		mounted() {
 			
 		},
 		created: function () {
-			this.res = this.detail;
-			console.log(this.res);
 		},
 	}
 </script>
