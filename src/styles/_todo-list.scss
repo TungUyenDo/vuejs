@@ -2,6 +2,8 @@
     &__list {
         list-style: none;
         padding: 0;
+        height: 300px;
+        overflow: auto;
         li {
             background: #343a40;
             padding: 5px 30px;

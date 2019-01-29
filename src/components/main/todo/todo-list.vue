@@ -3,7 +3,6 @@
    <div class="todo-list container">
 	   <div class="row">
 		   <div class="col-md-7">
-			   
 			   <div class="todo-list__heading">
 				   <span class="float-left">List Todo</span>
 				   <div class="btn btn-danger float-right" style="text-align:right; margin-bottom:5px">Delete All</div>
@@ -19,10 +18,15 @@
 				
 		   </div>
 		   <div class="col-md-5">
-			  
-			   <todo-detail  v-bind:detail ="detail"></todo-detail>
+			   <todo-detail v-bind:detail ="detail"></todo-detail>
 		   </div>
 	   </div>
+
+	   <!-- info-detail -->
+	   <!-- <info-detail v-on:click.native="say('hi! cuc cut')"></info-detail> -->
+
+
+
 		<br>
 		<br>
 		<br>
@@ -33,6 +37,7 @@
 
 <script>
 	import todoDetail from "./todo-detail";
+	import infoDetail from "./info-detail";
 	export default {
 		name:'todoList',
 		data: function() {
@@ -42,7 +47,8 @@
 			}
 		},
 		components:{
-			todoDetail
+			todoDetail,
+			infoDetail
 		},
 		mounted() {
 			this.fetchDataLocal()
@@ -61,8 +67,21 @@
 				// console.log(event);
 				this.detail = event;
 			},
+			say: function (event){
+				console.log(event)
+			},
+			add: function (event){
+				console.log(event)
+			},
 			
 		},
+		events: {
+		    'child-msg': function (msg) {
+		      // `this` in event callbacks are automatically bound
+		      // to the instance that registered it
+		      this.messages.push(msg)
+		    }
+		}
 
 	}
 </script>

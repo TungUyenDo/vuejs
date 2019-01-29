@@ -1,9 +1,8 @@
 
 <template>
    <div class="todo-detail">
-		<div class="heading">Todo Detail</div>
-		
-		<div class="detail">
+		<div   class="btn btn-success">Say</div>
+		<!-- <div class="detail">
 			<p style="color:#fff" v-if="!detail"><i>Select on list!</i></p>
 			<form  v-if="detail" >
 				<div class="form-group">
@@ -19,8 +18,7 @@
 					View Info Detail
 				</div>
 			</form>
-			
-		</div>
+		</div> -->
 	</div>
 	
 </template>
@@ -37,5 +35,10 @@
 		},
 		created: function () {
 		},
+		method:{
+			say: function (event){
+				console.log(event)
+			},
+		}
 	}
 </script>
