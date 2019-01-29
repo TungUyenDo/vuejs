@@ -10,7 +10,7 @@
 			   </div>
 				<ul class="todo-list__list">
 					<li class="media text-muted pt-3" v-for="i in res_fetch" v-bind:key="i.id" >
-						<a class="media-body pb-3 mb-0 small lh-125 border-gray" v-on:click="goToDetail(i)">{{i.title}}</a>
+						<a class="media-body pb-3 mb-0 small lh-125 border-gray" v-on:click="goToDetail(i)">{{i.id}}--> {{i.title}}</a>
 						<a class="btn btn-danger" style="padding:0 5px; color:#fff">Delete</a>
 					</li>
 					
@@ -55,11 +55,20 @@
 		},
 		methods: {
 			fetchDataLocal: function () {
-			const myRequest = new Request('https://jsonplaceholder.typicode.com/posts')
-				fetch(myRequest)
+			const link = 'http://192.168.1.158:8081/data.json';
+			const options = {
+					method: 'GET',
+					headers: {
+						'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+						'Access-Control-Allow-Origin':'*',
+					},
+					
+				}
+				fetch(new Request(link))
 					.then((response) => { return response.json() })
 					.then((data) => {
 						this.res_fetch = data;
+						console.log(this.res_fetch)
 					})
 					.catch( error => { console.log(error); });
 			},
