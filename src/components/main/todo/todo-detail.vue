@@ -16,9 +16,9 @@
 					<textarea v-model="detail.body" type="text" rows="5" class="form-control" placeholder="Description..."></textarea>
 				</div>
 				<div style="text-align:center">
-					<div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
+					<!-- <div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
 						View Info Detail
-					</div>
+					</div> -->
 					<div style="margin: 3px" class="btn btn-primary" @click="updateTodo(detail)">
 						Update Todo
 					</div>
@@ -36,16 +36,13 @@
 <script>
 	export default {
 		name:'todoDetail',
-		props: {
-			detail : ''
-		},
-		data:function(){
-			return{
-				url_posts : 'https://jsonplaceholder.typicode.com/posts',
-				url_posts_local : 'http://192.168.1.158:8081/data.json',
-			}
-		},
-		components:{
+		props: ['detail'],
+		data: function () {
+		    return {
+		      message: 'not updated',
+		      status : false,
+
+		    }
 		},
 		methods:{
 			updateTodo: function (item) {
@@ -61,9 +58,9 @@
 						'body':item.body
 					}
 				}
-			   fetch( url, options)
-			   console.log(options)
+			   fetch('http://localhost:3000/list/' + item.id, options)
 					.then((response) => { 
+						 console.log(response)
 						return response.json() 
 					})
 					.then((data) => {
@@ -73,19 +70,17 @@
 		    },
 
 		    delATodo: function (item) {
-			   fetch(new Request(this.url_posts_local + item.id),{
-					   method: 'DELETE',
-					   headers:{
-						   'Access-Control-Allow-Origin':'*',
-						   'content-type': 'application/json',
-					   }
-			   })
+		    	// console.log(this.status)
+		 		var options = {
+		 			method : 'DELETE'
+		 		}
+			   fetch('http://localhost:3000/list' + '/' + item.id,options)
 					.then((response) => { 
-						console.log(response);
 						return response.json() 
 					})
 					.then((data) => {
-						console.log(data)
+						this.status = true;
+						this.$emit('status', this.status)
 					})
 					.catch( error => { console.log(error); });
 		    },
@@ -112,16 +107,8 @@
 				.catch((err)=>console.error(err))
 		    }
 		},
-		data:function(){
-			return{
-
-			}
-		},
 		mounted() {
-            // this.testFetch()
-		},
-		created: function () {
-			
+			console.log(this.detail)
 		},
 	}
 </script>
