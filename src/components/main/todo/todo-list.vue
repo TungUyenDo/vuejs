@@ -18,13 +18,20 @@
 				
 		   </div>
 		   <div class="col-md-5">
-			   <todo-detail  v-on:status="statusLoader" v-bind:detail ="detail"></todo-detail>
+			   <todo-detail  v-on:status="statusLoader" v-bind:detail.sync="detail"></todo-detail>
 		   </div>
 	   </div>
 
 	   <!-- info-detail -->
 	   <!-- <info-detail v-on:click.native="say('hi! cuc cut')"></info-detail> -->
 
+	   <div class="row">
+	   		<div class="container">
+	   			<div class="col-md-12">
+	   				<!-- <date-picker-wrapper></date-picker-wrapper> -->
+	   			</div>
+	   		</div>
+	   </div>
 
 
 		<br>
@@ -37,7 +44,9 @@
 
 <script>
 	import todoDetail from "./todo-detail";
-	import infoDetail from "./info-detail";
+	import datePickerWrapper from "../date-picker/date-picker.wrapper";
+
+
 	export default {
 		name:'todoList',
 		data: function() {
@@ -49,7 +58,7 @@
 		},
 		components:{
 			todoDetail,
-			infoDetail
+			datePickerWrapper
 		},
 		mounted() {
 			this.fetchDataLocal()
@@ -68,7 +77,7 @@
 					.then((response) => { return response.json() })
 					.then((data) => {
 						this.res_fetch = data;
-						console.log(this.res_fetch)
+						// console.log(this.res_fetch)
 					})
 					.catch( error => { console.log(error); });
 			},

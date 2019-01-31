@@ -16,32 +16,37 @@
 					<textarea v-model="detail.body" type="text" rows="5" class="form-control" placeholder="Description..."></textarea>
 				</div>
 				<div style="text-align:center">
-					<!-- <div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
+					<div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
 						View Info Detail
-					</div> -->
-					<div style="margin: 3px" class="btn btn-primary" @click="updateTodo(detail)">
-						Update Todo
 					</div>
+					<!-- <div style="margin: 3px" class="btn btn-primary" @click="updateTodo(detail)">
+						Update Todo
+					</div> -->
 					<div style="margin: 3px" class="btn btn-danger" @click="delATodo(detail)">
 						Delete Todo
 					</div>
 				</div>
-				
 			</form>
-			
 		</div>
+		<todo-modal ></todo-modal>
 	</div>
 </template>
 
 <script>
+	
+	import todoModal from './todo-modal'
+
 	export default {
 		name:'todoDetail',
+		components:{
+			todoModal
+		},
 		props: ['detail'],
 		data: function () {
 		    return {
 		      message: 'not updated',
 		      status : false,
-
+		      atodo : {}
 		    }
 		},
 		methods:{
@@ -79,21 +84,36 @@
 						return response.json() 
 					})
 					.then((data) => {
+
+						// set null for form
+						this.detail.body = ''
+						this.detail.id = ''
+						this.detail.title = ''
+
+						// set status = true;
 						this.status = true;
-						this.$emit('status', this.status)
+
+						//send status to list for update new list
+						this.$emit('status', this.status);
 					})
 					.catch( error => { console.log(error); });
 		    },
 		    getATodo: function (item) {
-		      console.log(item);
-			   fetch(new Request(this.url_posts_local + '?id=' + item.id),{
-			   		method: 'GET',
-			   })
+		    	const options = {
+		    		method: 'GET',
+		    	}
+
+			   fetch(('http://localhost:3000/list' + '?id=' + item.id),options)
 					.then((response) => { 
 						return response.json() 
 					})
 					.then((data) => {
-						console.log(data)
+						this.atodo = {
+							data : data[0],
+							showModal : true
+						};
+						// console.log(this.atodo)
+						// this.$emit('dataATodo', data[0]);
 					})
 					.catch( error => { console.log(error); });
 		    },
@@ -108,7 +128,10 @@
 		    }
 		},
 		mounted() {
-			console.log(this.detail)
+			console.log('mounted')
+		},
+		created() {
+			console.log('created')
 		},
 	}
 </script>
