@@ -1,16 +1,46 @@
 
 <template>
-   <div class="todo-detail">
-		<!-- <div class="btn btn-success">Say</div> -->
+	<div>
+		<transition name="modal" >
+			<div class="modal-mask" v-if="isShowModal">
+				<div class="modal-wrapper">
+					<div class="modal-container">
 
-			<button @click="showModal" ref="btnShow">
-		    Open Modal
-		  </button>
-		  <b-modal @hidden="onHidden">
-		    <div class="d-block">Hello From My Modal!</div>
-		    <button @click="hideModal">Close Me</button>
-		 </b-modal>
+					<div class="modal-header" style="justify-content:center">
+						<div style="    height: 30px;
+								    line-height: 30px;
+								    text-align: center;
+								    width: 30px;
+								    border: 1px solid;
+								    border-radius: 50%;">
+							{{dataDetailOnModal.id}}
+						</div>
+					</div>
+
+					<div class="title" style="text-align:center; 
+											margin-top:20px;    
+											background-color: #215b41;
+    										color: #fff;">
+							{{dataDetailOnModal.title}}
+						</div>
+
+					<div class="modal-body">
+						<div class="body">
+							{{dataDetailOnModal.body}}
+						</div>
+					</div>
+
+					<div class="modal-footer" style="justify-content: center;">
+						<button class="modal-default-button btn btn-primary" @click="$emit('close')">
+							OK 
+						</button>
+					</div>
+					</div>
+				</div>
+			</div>
+		</transition>
 	</div>
+	
 	
 </template>
 
@@ -19,13 +49,16 @@
 
 	export default {
 		name:'todoModal',
-		props: ['aTodoModal'],
 		data:function() {
 			return{
-				// showModal: false
+				
 			}
 	    	
-	  	},
+		},
+		props:{
+			isShowModal:'',
+			dataDetailOnModal : ''
+		},
 		components:{
 			bModal
 		},
@@ -33,26 +66,10 @@
 
 		},
 		created: function () {
-			console.log(this.aTodoModal);
-			// if(this.aTodoModal.showModal){
-			// 	this.showModal = true
-			// }
+
 		},
 		methods: {
-			say: function (event){
-				console.log(event)
-			},
-		  	showModal () {
-		    	this.$root.$emit('bv::show::modal','modal1')
-		  	},
-		  	hideModal () {
-		    	this.$root.$emit('bv::hide::modal','modal1')
-		  	},
-		  	onHidden (evt) {
-			    // Return focus to our Open Modal button
-			    // See accessibility below for additional return-focus methods
-			    this.$refs.btnShow.$el.focus()
-		  	}
+			
 		}
 	}
 </script>

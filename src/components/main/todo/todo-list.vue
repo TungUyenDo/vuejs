@@ -11,6 +11,10 @@
 				<ul class="todo-list__list">
 					<li class="media text-muted pt-3" v-for="i in res_fetch" v-bind:key="i.id" >
 						<a class="media-body pb-3 mb-0 small lh-125 border-gray" v-on:click="goToDetail(i)">{{i.id}}--> {{i.title}}</a>
+
+						<a id="show-modal" style="padding:0 5px; color:#fff" class="btn btn-success" @click="openModal(i)">
+							View Modal Detail
+						</a>
 						<a @click="delATodo(i)" class="btn btn-danger" style="padding:0 5px; color:#fff">Delete</a>
 					</li>
 					
@@ -18,12 +22,12 @@
 				
 		   </div>
 		   <div class="col-md-5">
-			   <todo-detail  v-on:status="statusLoader" v-bind:detail.sync="detail"></todo-detail>
+			   <todo-detail  v-on:status="statusLoader" v-bind:detail.sync="detailList"></todo-detail>
 		   </div>
-	   </div>
 
-	   <!-- info-detail -->
-	   <!-- <info-detail v-on:click.native="say('hi! cuc cut')"></info-detail> -->
+		   <todo-modal :isShowModal="showModal" @close="showModal = false" :dataDetailOnModal="detailList" ></todo-modal>
+		    
+	   </div>
 
 	   <div class="row">
 	   		<div class="container">
@@ -45,23 +49,25 @@
 <script>
 	import todoDetail from "./todo-detail";
 	import datePickerWrapper from "../date-picker/date-picker.wrapper";
-
+	import todoModal from './todo-modal'
 
 	export default {
 		name:'todoList',
 		data: function() {
 			return {
 				res_fetch:'',
-				detail:'',
-				status : false
+				detailList:'',
+				status : false,
+				showModal: false,
 			}
 		},
 		components:{
 			todoDetail,
-			datePickerWrapper
+			datePickerWrapper,
+			todoModal
 		},
 		mounted() {
-			this.fetchDataLocal()
+			this.fetchDataLocal();
 		},
 		methods: {
 			fetchDataLocal: function () {
@@ -83,7 +89,11 @@
 			},
 			goToDetail: function (event) {
 				// console.log(event);
-				this.detail = event;
+				this.detailList = event;
+			},
+			goToModal: function (event) {
+				// console.log(event);
+				this.detailList = event;
 			},
 			delATodo: function (item) {
 		 		var options = {
@@ -112,6 +122,11 @@
 			add: function (event){
 				console.log(event)
 			},
+			openModal:function(event){
+				this.detailList = event;
+				this.showModal = true;
+
+			}
 			
 		},
 		events: {

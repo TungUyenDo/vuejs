@@ -16,9 +16,10 @@
 					<textarea v-model="detail.body" type="text" rows="5" class="form-control" placeholder="Description..."></textarea>
 				</div>
 				<div style="text-align:center">
-					<div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
+					<!-- <div style="margin: 3px" class="btn btn-success" @click="getATodo(detail)">
 						View Info Detail
-					</div>
+					</div> -->
+
 					<!-- <div style="margin: 3px" class="btn btn-primary" @click="updateTodo(detail)">
 						Update Todo
 					</div> -->
@@ -28,25 +29,27 @@
 				</div>
 			</form>
 		</div>
-		<todo-modal ></todo-modal>
+		
 	</div>
 </template>
 
 <script>
 	
-	import todoModal from './todo-modal'
+	
 
 	export default {
 		name:'todoDetail',
 		components:{
-			todoModal
 		},
-		props: ['detail'],
+		props:{
+			detail:''
+		},
 		data: function () {
 		    return {
 		      message: 'not updated',
 		      status : false,
-		      atodo : {}
+			  atodo : {},
+			  
 		    }
 		},
 		methods:{
@@ -98,6 +101,7 @@
 					})
 					.catch( error => { console.log(error); });
 		    },
+
 		    getATodo: function (item) {
 		    	const options = {
 		    		method: 'GET',
@@ -110,13 +114,15 @@
 					.then((data) => {
 						this.atodo = {
 							data : data[0],
-							showModal : true
+							// showModal : true
 						};
 						// console.log(this.atodo)
 						// this.$emit('dataATodo', data[0]);
 					})
 					.catch( error => { console.log(error); });
-		    },
+			},
+			
+			
 
 		    // test for Get all posts
 		    testFetch:function(){
